@@ -6,7 +6,9 @@
         "appID": "9S3B5R96Y2.com.connertate.Photo-Dump",
         "paths": [
           "/joinAlbum/*",
-          "/joinAlbum"
+          "/joinAlbum",
+          "/photo-dump-site/joinAlbum/*",
+          "/photo-dump-site/joinAlbum"
         ]
       }
     ]
