@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Bomb</title>
+    <title>Photo Dump</title>
     
     <!-- Open Graph / Social Media Preview -->
-    <meta property="og:title" content="Photo Bomb">
+    <meta property="og:title" content="Photo Dump">
     <meta property="og:description" content="Share your photos instantly">
     <meta property="og:image" content="https://connertate.com/bomb.png">
     <meta property="og:image:width" content="1200">
@@ -16,7 +16,7 @@
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Photo Bomb">
+    <meta name="twitter:title" content="Photo Dump">
     <meta name="twitter:description" content="Share your photos instantly">
     <meta name="twitter:image" content="https://connertate.com/bomb.png">
     
@@ -49,13 +49,29 @@
             margin: 0;
             line-height: 0.9;
         }
+        .download-button {
+            margin-top: 30px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .download-button img {
+            height: 50px;
+            width: auto;
+            transition: opacity 0.2s;
+        }
+        .download-button img:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <div class="title-container">
         <img src="bomb.png" alt="Bomb" class="bomb-image">
         <div class="title-text">PHOTO</div>
-        <div class="title-text">BOMB</div>
+        <div class="title-text">DUMP</div>
+        <a href="#" class="download-button">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1726012800" alt="Download on the App Store">
+        </a>
     </div>
 </body>
 </html>
