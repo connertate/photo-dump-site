@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // Redirect 404s to appropriate pages
+        (function() {
+            const path = window.location.pathname;
+            const search = window.location.search;
+            
+            // If path starts with /joinAlbum/, redirect to joinAlbum page
+            if (path.startsWith('/joinAlbum/') || path === '/joinAlbum') {
+                // Extract the album ID from the path or query parameter
+                const albumIdMatch = path.match(/\/joinAlbum\/([^\/]+)/);
+                const albumId = albumIdMatch ? albumIdMatch[1] : new URLSearchParams(search).get('id');
+                
+                if (albumId) {
+                    window.location.replace('/joinAlbum/?id=' + albumId);
+                } else {
+                    window.location.replace('/joinAlbum/' + search);
+                }
+            } else {
+                // For other 404s, redirect to home
+                window.location.replace('/' + window.location.search);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
