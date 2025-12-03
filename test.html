@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Photo Dump Album Share Links</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-link {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .test-link:hover {
+            background: #764ba2;
+        }
+        .check {
+            color: green;
+            font-weight: bold;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Dump Album Share Links - Test Plan</h1>
+    
+    <div class="test-section">
+        <h2>✓ Implementation Complete</h2>
+        <p>The following features have been implemented:</p>
+        <ul>
+            <li class="check">✓ Apple App Site Association file at <code>/.well-known/apple-app-site-association</code></li>
+            <li class="check">✓ Landing page for album invitations at <code>/joinAlbum/</code></li>
+            <li class="check">✓ Support for both URL formats: <code>/joinAlbum/ALBUM_ID</code> and <code>/joinAlbum?id=ALBUM_ID</code></li>
+            <li class="check">✓ Smart redirect logic (attempts to open app, falls back to landing page)</li>
+            <li class="check">✓ Copy Link button functionality</li>
+            <li class="check">✓ Apple Smart App Banner meta tags</li>
+            <li class="check">✓ Error handling for invalid/missing album IDs</li>
+            <li class="check">✓ 404.html for routing support</li>
+            <li class="check">✓ .nojekyll file for GitHub Pages compatibility</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Links</h2>
+        <p>Click these links to test different scenarios:</p>
+        
+        <h3>Valid Album Links (with IDs)</h3>
+        <a href="/joinAlbum/?id=album-123" class="test-link">Query Parameter Format: /joinAlbum/?id=album-123</a>
+        <a href="/joinAlbum/album-456" class="test-link">Path Format: /joinAlbum/album-456</a>
+        <a href="/joinAlbum/test-album-abc-xyz-123" class="test-link">Path Format: /joinAlbum/test-album-abc-xyz-123</a>
+        
+        <h3>Invalid Album Links (no ID)</h3>
+        <a href="/joinAlbum/" class="test-link">No Album ID: /joinAlbum/</a>
+        <a href="/joinAlbum" class="test-link">No Album ID: /joinAlbum</a>
+    </div>
+    
+    <div class="test-section">
+        <h2>Manual Testing Checklist</h2>
+        <h3>For iOS Device Testing:</h3>
+        <ol>
+            <li>Deploy the site to <code>https://photo-dump.app</code></li>
+            <li>Update <code>.well-known/apple-app-site-association</code> with actual Team ID and Bundle ID</li>
+            <li>Update <code>joinAlbum/index.html</code> with actual App Store ID</li>
+            <li>Send an album link to yourself via Messages or Mail</li>
+            <li>Long-press the link - should show "Open in Photo Dump" option</li>
+            <li>Tap to open - should launch the app if installed</li>
+        </ol>
+        
+        <h3>For Web Testing:</h3>
+        <ol>
+            <li>Visit album link without app installed</li>
+            <li>Should see landing page with:
+                <ul>
+                    <li>Photo Dump logo and title</li>
+                    <li>Album invitation message</li>
+                    <li>Album ID displayed</li>
+                    <li>Copy Link button (test it copies correctly)</li>
+                    <li>App Store download button</li>
+                </ul>
+            </li>
+            <li>Test invalid link (no ID) - should show error message</li>
+        </ol>
+        
+        <h3>JSON Validation:</h3>
+        <ol>
+            <li>Verify <code>/.well-known/apple-app-site-association</code> is valid JSON</li>
+            <li>Verify it's served with <code>Content-Type: application/json</code></li>
+            <li>Verify it's accessible at <code>https://photo-dump.app/.well-known/apple-app-site-association</code></li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>Configuration Needed</h2>
+        <p><strong>Before deploying, update these placeholders:</strong></p>
+        <ol>
+            <li><strong>.well-known/apple-app-site-association</strong>:
+                <ul>
+                    <li>Replace <code>YOUR_TEAM_ID</code> with Apple Developer Team ID</li>
+                    <li>Replace <code>com.photodump.app</code> with actual bundle ID</li>
+                </ul>
+            </li>
+            <li><strong>joinAlbum/index.html</strong>:
+                <ul>
+                    <li>Replace <code>YOUR_APP_ID</code> in Smart App Banner meta tag (line 8)</li>
+                    <li>Replace <code>YOUR_APP_ID</code> in App Store link (line 228)</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    
+    <div class="test-section">
+        <h2>Deployment Notes</h2>
+        <ul>
+            <li>The site must be served over HTTPS</li>
+            <li>Domain must be <code>photo-dump.app</code></li>
+            <li>The <code>.nojekyll</code> file ensures GitHub Pages serves the <code>.well-known</code> directory</li>
+            <li>No server-side code is required - this is a static site</li>
+        </ul>
+    </div>
+    
+    <div class="test-section">
+        <h2>Files Changed</h2>
+        <ul>
+            <li><code>.well-known/apple-app-site-association</code> - New file for universal links</li>
+            <li><code>joinAlbum/index.html</code> - New landing page for album invitations</li>
+            <li><code>404.html</code> - New file for routing support</li>
+            <li><code>.nojekyll</code> - New file for GitHub Pages compatibility</li>
+            <li><code>README.md</code> - Updated with setup and deployment instructions</li>
+        </ul>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="/" style="color: #667eea; text-decoration: none;">← Back to Home</a>
+    </div>
+</body>
+</html>
