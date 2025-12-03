@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Deep Link - Photo Dump</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .test-link {
+            display: block;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f7f7f7;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            border: 2px solid #667eea;
+            transition: all 0.2s;
+        }
+        .test-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .test-link:active {
+            transform: translateY(0);
+        }
+        .description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+        .note strong {
+            color: #856404;
+        }
+        .instructions {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        .instructions h2 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .instructions ol {
+            line-height: 1.8;
+            color: #555;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Deep Link Test Page</h1>
+        <p class="subtitle">Test Photo Dump's universal links and deep linking functionality</p>
+        
+        <div class="description">
+            <strong>Sample Album ID:</strong><br>
+            <code id="sampleId">123e4567-e89b-12d3-a456-426614174000</code>
+        </div>
+        
+        <a href="https://photo-dump.app/joinAlbum/123e4567-e89b-12d3-a456-426614174000" class="test-link">
+            📱 Test Link: Join Sample Album
+        </a>
+        
+        <a href="https://photo-dump.app/joinAlbum/invalid-album-id" class="test-link">
+            ❌ Test Link: Invalid Album ID
+        </a>
+        
+        <div class="note">
+            <strong>Note:</strong> Replace the sample UUID above with a real album ID from your database to test with actual data.
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 How to Test</h2>
+            <ol>
+                <li><strong>Copy this page's URL</strong> and send it to yourself via iMessage</li>
+                <li><strong>On your iOS device,</strong> tap the link in iMessage</li>
+                <li>If the Photo Dump app is installed:
+                    <ul>
+                        <li>iOS should automatically open the app</li>
+                        <li>You should see the "Join Album" modal</li>
+                        <li>If you already joined the album, it navigates directly to it</li>
+                    </ul>
+                </li>
+                <li>If the app is NOT installed:
+                    <ul>
+                        <li>Safari opens the joinAlbum landing page</li>
+                        <li>You'll see album details and an App Store download button</li>
+                        <li>After installing, tap "Open" or tap the link again to deep link</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        
+        <div class="instructions">
+            <h2>🔗 Test Direct Links</h2>
+            <p>You can also create custom test links with different album IDs:</p>
+            <code>https://photo-dump.app/joinAlbum/YOUR-UUID-HERE</code>
+        </div>
+        
+        <div class="instructions">
+            <h2>✅ What to Verify</h2>
+            <ol>
+                <li><strong>Universal Links:</strong> App opens automatically (not Safari first)</li>
+                <li><strong>Join Modal:</strong> Shows album preview with title and photos</li>
+                <li><strong>Already Joined:</strong> Navigates directly to album instead of modal</li>
+                <li><strong>Invalid ID:</strong> Shows error message in both app and website</li>
+                <li><strong>Fallback:</strong> Website loads if app not installed</li>
+                <li><strong>Post-Install:</strong> Deep link works after app installation</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Allow easy UUID copying
+        document.getElementById('sampleId').addEventListener('click', function() {
+            const text = this.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const original = this.textContent;
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                    this.textContent = original;
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
