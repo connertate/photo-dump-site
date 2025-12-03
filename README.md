@@ -14,19 +14,19 @@ Website for the Photo Dump iOS app.
 
 ### Apple App Site Association
 
-The file `.well-known/apple-app-site-association` still needs your Apple Developer Team ID:
+The file `.well-known/apple-app-site-association` is now fully configured:
 
-1. Replace `YOUR_TEAM_ID` with your Apple Developer Team ID (10-character alphanumeric)
-2. Bundle ID is already set to: `com.connertate.Photo-Dump`
+✅ **Team ID**: `9S3B5R96Y2`  
+✅ **Bundle ID**: `com.connertate.Photo-Dump`
 
-Example:
+Current configuration:
 ```json
 {
   "applinks": {
     "apps": [],
     "details": [
       {
-        "appID": "ABCD123456.com.connertate.Photo-Dump",
+        "appID": "9S3B5R96Y2.com.connertate.Photo-Dump",
         "paths": ["/joinAlbum/*", "/joinAlbum"]
       }
     ]
