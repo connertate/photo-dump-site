@@ -15,7 +15,7 @@
                 const albumId = albumIdMatch ? albumIdMatch[1] : new URLSearchParams(search).get('id');
                 
                 if (albumId) {
-                    window.location.replace('/joinAlbum/?id=' + albumId);
+                    window.location.replace('/joinAlbum/?id=' + encodeURIComponent(albumId));
                 } else {
                     window.location.replace('/joinAlbum/' + search);
                 }
