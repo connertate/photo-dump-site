@@ -143,18 +143,19 @@ All requirements from the problem statement have been successfully implemented.
 
 ---
 
-## ⚙️ Configuration Required
-
-Before deploying to production, update these placeholders:
+## ⚙️ Configuration Status
 
 ### 1. Apple App Site Association (`.well-known/apple-app-site-association`)
+
+**Status**: Partially configured. Still needs Team ID.
+
 ```json
 {
   "applinks": {
     "apps": [],
     "details": [
       {
-        "appID": "YOUR_TEAM_ID.com.photodump.app",  // ← Update this
+        "appID": "YOUR_TEAM_ID.com.connertate.Photo-Dump",  // ← Replace YOUR_TEAM_ID
         "paths": ["/joinAlbum/*", "/joinAlbum"]
       }
     ]
@@ -163,29 +164,31 @@ Before deploying to production, update these placeholders:
 ```
 
 Replace:
-- `YOUR_TEAM_ID` → Apple Developer Team ID (e.g., "ABCD123456")
-- `com.photodump.app` → Your actual bundle ID
+- `YOUR_TEAM_ID` → Your Apple Developer Team ID (10-character alphanumeric, e.g., "ABCD123456")
+- Bundle ID is already set: ✅ `com.connertate.Photo-Dump`
 
 ### 2. Landing Page (`joinAlbum/index.html`)
 
-**Line 8**: Smart App Banner
+**Status**: Fully configured ✅
+
+**Line 9**: Smart App Banner
 ```html
-<meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+<meta name="apple-itunes-app" content="app-id=6695721343">
 ```
-Replace: `YOUR_APP_ID` → Your App Store app ID (e.g., "123456789")
+✅ App Store ID configured: `6695721343`
 
 **Line 220**: App Store Link
 ```html
-<a href="https://apps.apple.com/us/app/id/YOUR_APP_ID" ...>
+<a href="https://apps.apple.com/us/app/id/6695721343" ...>
 ```
-Replace: `YOUR_APP_ID` → Your App Store app ID (e.g., "123456789")
-
+✅ App Store ID configured: `6695721343`
 ---
 
 ## 🚀 Deployment Steps
 
 1. **Update Configuration**
-   - Replace all `YOUR_TEAM_ID` and `YOUR_APP_ID` placeholders
+   - ⚠️ Still needed: Replace `YOUR_TEAM_ID` in `.well-known/apple-app-site-association`
+   - ✅ App Store ID and Bundle ID are already configured
    
 2. **Deploy to GitHub Pages**
    - Push changes to main branch

@@ -14,10 +14,10 @@ Website for the Photo Dump iOS app.
 
 ### Apple App Site Association
 
-The file `.well-known/apple-app-site-association` needs to be configured with your actual app details:
+The file `.well-known/apple-app-site-association` still needs your Apple Developer Team ID:
 
-1. Replace `YOUR_TEAM_ID` with your Apple Developer Team ID
-2. Replace `com.photodump.app` with your actual app bundle ID
+1. Replace `YOUR_TEAM_ID` with your Apple Developer Team ID (10-character alphanumeric)
+2. Bundle ID is already set to: `com.connertate.Photo-Dump`
 
 Example:
 ```json
@@ -26,7 +26,7 @@ Example:
     "apps": [],
     "details": [
       {
-        "appID": "ABCD123456.com.example.photodump",
+        "appID": "ABCD123456.com.connertate.Photo-Dump",
         "paths": ["/joinAlbum/*", "/joinAlbum"]
       }
     ]
@@ -36,13 +36,14 @@ Example:
 
 ### Apple Smart App Banner
 
-In `joinAlbum/index.html`, replace `YOUR_APP_ID` with your actual App Store app ID:
+App Store ID is already configured in `joinAlbum/index.html`:
 
 ```html
-<meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+<meta name="apple-itunes-app" content="app-id=6695721343">
 ```
 
-Also update the App Store link in the same file.
+The App Store link is also updated with ID `6695721343`.
+
 
 ## Deployment
 
