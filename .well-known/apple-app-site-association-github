@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "9S3B5R96Y2.com.connertate.Photo-Dump",
+        "paths": [
+          "/photo-dump-site/joinAlbum/*",
+          "/photo-dump-site/joinAlbum"
+        ]
+      }
+    ]
+  }
+}
