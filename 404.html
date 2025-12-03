@@ -8,20 +8,26 @@
             const path = window.location.pathname;
             const search = window.location.search;
             
-            // If path starts with /joinAlbum/, redirect to joinAlbum page
-            if (path.startsWith('/joinAlbum/') || path === '/joinAlbum') {
-                // Extract the album ID from the path or query parameter
-                const albumIdMatch = path.match(/\/joinAlbum\/([^\/]+)/);
-                const albumId = albumIdMatch ? albumIdMatch[1] : new URLSearchParams(search).get('id');
-                
-                if (albumId) {
-                    window.location.replace('/joinAlbum/?id=' + encodeURIComponent(albumId));
+            // Handle GitHub Pages paths (/photo-dump-site/joinAlbum/...)
+            // and custom domain paths (/joinAlbum/...)
+            const joinAlbumMatch = path.match(/\/(?:photo-dump-site\/)?joinAlbum\/([^\/]+)/);
+            
+            if (joinAlbumMatch) {
+                // Extract the album ID
+                const albumId = joinAlbumMatch[1];
+                // Redirect to the joinAlbum page with the album ID
+                window.location.replace('/photo-dump-site/joinAlbum/?id=' + encodeURIComponent(albumId));
+            } else if (path.includes('/joinAlbum')) {
+                // If just /joinAlbum without an ID
+                const queryAlbumId = new URLSearchParams(search).get('id');
+                if (queryAlbumId) {
+                    window.location.replace('/photo-dump-site/joinAlbum/' + search);
                 } else {
-                    window.location.replace('/joinAlbum/' + search);
+                    window.location.replace('/photo-dump-site/joinAlbum/');
                 }
             } else {
                 // For other 404s, redirect to home
-                window.location.replace('/' + window.location.search);
+                window.location.replace('/photo-dump-site/' + window.location.search);
             }
         })();
     </script>
