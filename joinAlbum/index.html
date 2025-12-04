@@ -173,7 +173,14 @@
         function attemptAppOpen(albumId) {
             if (!albumId) return;
             
-            const universalLink = `https://photo-dump.app/joinAlbum/${encodeURIComponent(albumId)}`;
+            // Use the current domain for the universal link
+            const currentHost = window.location.host;
+            const currentProtocol = window.location.protocol;
+            const basePath = window.location.pathname.includes('/photo-dump-site/') 
+                ? '/photo-dump-site/joinAlbum/' 
+                : '/joinAlbum/';
+            
+            const universalLink = `${currentProtocol}//${currentHost}${basePath}${encodeURIComponent(albumId)}`;
             
             // Try to open the app
             window.location.href = universalLink;
@@ -251,7 +258,14 @@
         
         // Copy link to clipboard
         function copyLink(albumId) {
-            const link = `https://photo-dump.app/joinAlbum/${encodeURIComponent(albumId)}`;
+            // Use the current URL format
+            const currentHost = window.location.host;
+            const currentProtocol = window.location.protocol;
+            const basePath = window.location.pathname.includes('/photo-dump-site/') 
+                ? '/photo-dump-site/joinAlbum/' 
+                : '/joinAlbum/';
+            
+            const link = `${currentProtocol}//${currentHost}${basePath}${encodeURIComponent(albumId)}`;
             
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(link).then(() => {
