@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Deep Link - Development Mode</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #0dcaf0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .button:active {
+            transform: scale(0.98);
+        }
+        .button-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        ol {
+            line-height: 1.8;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Deep Link Tester (Dev Mode)</h1>
+        
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Universal links only auto-open with TestFlight/App Store builds. 
+            This page helps you test the deep link <em>handling</em> in your Xcode build.
+        </div>
+        
+        <div class="info">
+            <strong>📱 Setup Required:</strong>
+            <ol>
+                <li>Open this page on your <strong>iOS device</strong> (not simulator)</li>
+                <li>Have your app <strong>running from Xcode</strong> on that device</li>
+                <li>Click the button below</li>
+                <li>Safari will try to open the URL</li>
+                <li>Manually copy the URL from Safari's address bar</li>
+                <li>Switch to your app and trigger the deep link manually</li>
+            </ol>
+        </div>
+
+        <label for="albumId" style="font-weight: 600; color: #333;">Album ID (UUID):</label>
+        <input 
+            type="text" 
+            id="albumId" 
+            value="123e4567-e89b-12d3-a456-426614174000"
+            placeholder="Enter album UUID"
+        >
+        
+        <a href="#" id="testButton" class="button button-primary">
+            🔗 Open Deep Link in Safari
+        </a>
+        
+        <div id="result" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; display: none;">
+            <strong>URL to test:</strong><br>
+            <code id="urlDisplay" style="word-break: break-all; display: block; margin-top: 10px;"></code>
+        </div>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+            <h3 style="color: #333; font-size: 1.2rem;">Alternative: Use URL Directly</h3>
+            <p style="color: #666; font-size: 0.9rem;">
+                Copy this URL and open it in Safari on your device:
+            </p>
+            <input 
+                type="text" 
+                id="fullUrl" 
+                readonly
+                value="https://connertate.github.io/photo-dump-site/joinAlbum/123e4567-e89b-12d3-a456-426614174000"
+            >
+            <button onclick="copyUrl()" class="button button-primary" style="margin-top: 10px;">
+                📋 Copy URL
+            </button>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f8d7da; border-radius: 12px;">
+            <h3 style="color: #721c24; margin-top: 0;">Expected Behavior</h3>
+            <ul style="color: #721c24; font-size: 0.9rem; line-height: 1.6;">
+                <li><strong>Xcode Debug Build:</strong> Link opens in Safari (normal)</li>
+                <li><strong>TestFlight Build:</strong> App opens automatically ✅</li>
+                <li><strong>App Store Build:</strong> App opens automatically ✅</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        const albumIdInput = document.getElementById('albumId');
+        const fullUrlInput = document.getElementById('fullUrl');
+        const testButton = document.getElementById('testButton');
+        const resultDiv = document.getElementById('result');
+        const urlDisplay = document.getElementById('urlDisplay');
+
+        function updateUrl() {
+            const albumId = albumIdInput.value.trim();
+            const url = `https://connertate.github.io/photo-dump-site/joinAlbum/${encodeURIComponent(albumId)}`;
+            fullUrlInput.value = url;
+            testButton.href = url;
+        }
+
+        albumIdInput.addEventListener('input', updateUrl);
+        
+        testButton.addEventListener('click', function(e) {
+            const albumId = albumIdInput.value.trim();
+            const url = `https://connertate.github.io/photo-dump-site/joinAlbum/${encodeURIComponent(albumId)}`;
+            
+            urlDisplay.textContent = url;
+            resultDiv.style.display = 'block';
+            
+            // Let the link open naturally
+        });
+
+        function copyUrl() {
+            fullUrlInput.select();
+            document.execCommand('copy');
+            
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Copied!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 2000);
+        }
+
+        // Initialize
+        updateUrl();
+    </script>
+</body>
+</html>
